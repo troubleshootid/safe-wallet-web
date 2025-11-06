@@ -92,6 +92,35 @@ export const initSafeSDK = async ({
     isL1SafeSingleton = true
   }
 
+  // For custom networks (e.g., Xone Network), fetch contract addresses from Config Service
+  if (!contractNetworks) {
+    try {
+      const configServiceUrl = process.env.NEXT_PUBLIC_GATEWAY_URL_PRODUCTION || 'https://safe-client.safe.global'
+      const response = await fetch(`${configServiceUrl}/v1/chains/${chainId}`)
+      if (response.ok) {
+        const chainInfo = await response.json()
+        if (chainInfo?.features?.includes('CONTRACT_INTERACTION') && chainInfo?.contractAddresses) {
+          contractNetworks = {
+            [chainId]: {
+              safeSingletonAddress: chainInfo.contractAddresses.safeSingletonAddress,
+              safeProxyFactoryAddress: chainInfo.contractAddresses.safeProxyFactoryAddress,
+              multiSendAddress: chainInfo.contractAddresses.multiSendAddress,
+              multiSendCallOnlyAddress: chainInfo.contractAddresses.multiSendCallOnlyAddress,
+              fallbackHandlerAddress: chainInfo.contractAddresses.fallbackHandlerAddress,
+              signMessageLibAddress: chainInfo.contractAddresses.signMessageLibAddress,
+              createCallAddress: chainInfo.contractAddresses.createCallAddress,
+              simulateTxAccessorAddress: chainInfo.contractAddresses.simulateTxAccessorAddress,
+              safeWebAuthnSignerFactoryAddress: chainInfo.contractAddresses.safeWebAuthnSignerFactoryAddress,
+            },
+          }
+        }
+      }
+    } catch (error) {
+      console.warn(`[SafeSDK] Failed to fetch custom network config for chain ${chainId}:`, error)
+      // Continue without custom config - will use default deployments
+    }
+  }
+
   if (undeployedSafe) {
     if (isPredictedSafeProps(undeployedSafe.props) || isReplayedSafeProps(undeployedSafe.props)) {
       return Safe.init({

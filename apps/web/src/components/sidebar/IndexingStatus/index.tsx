@@ -4,7 +4,7 @@ import { useChainsGetIndexingStatusV1Query } from '@safe-global/store/gateway/AU
 import useChainId from '@/hooks/useChainId'
 import { OpenInNewRounded } from '@mui/icons-material'
 
-const STATUS_PAGE = 'https://status.safe.global'
+const STATUS_PAGE = process.env.NEXT_PUBLIC_STATUS_PAGE_URL || 'https://status.safe.global'
 const MAX_SYNC_DELAY = 1000 * 60 * 5 // 5 minutes
 const POLL_INTERVAL = 1000 * 60 // 1 minute
 

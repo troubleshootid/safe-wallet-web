@@ -18,10 +18,19 @@ export function getRecoveryProposalTransactions({
   newThreshold: number
   newOwners: Array<AddressInfo>
 }): Array<MetaTransactionData> {
-  const safeDeployment = getSafeSingletonDeployment({ network: safe.chainId, version: safe.version ?? undefined })
+  let safeDeployment = getSafeSingletonDeployment({ network: safe.chainId, version: safe.version ?? undefined })
 
+  // For custom networks (e.g., Xone Network), the deployment info may not exist
+  // In this case, we can still use the ABI from a known network (e.g., Ethereum Mainnet)
+  // because Safe ABI is the same across all networks
   if (!safeDeployment) {
-    throw new Error('Safe deployment not found')
+    // Fallback to get ABI from Ethereum Mainnet (chainId '1')
+    safeDeployment = getSafeSingletonDeployment({ network: '1', version: safe.version ?? undefined })
+    
+    if (!safeDeployment) {
+      // If even the fallback fails, throw error
+      throw new Error('Safe deployment not found')
+    }
   }
 
   const safeInterface = new Interface(safeDeployment.abi)

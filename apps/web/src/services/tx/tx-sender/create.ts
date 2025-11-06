@@ -5,6 +5,7 @@ import type { Chain } from '@safe-global/store/gateway/AUTO_GENERATED/chains'
 import { getTransactionDetails } from '@/utils/transactions'
 import type { AddOwnerTxParams, RemoveOwnerTxParams, SwapOwnerTxParams } from '@safe-global/protocol-kit'
 import type { MetaTransactionData, SafeTransaction, SafeTransactionDataPartial } from '@safe-global/types-kit'
+import { OperationType } from '@safe-global/types-kit'
 import extractTxInfo from '../extractTxInfo'
 import { getAndValidateSafeSDK } from './sdk'
 
@@ -20,10 +21,27 @@ export const createTx = async (txParams: SafeTransactionDataPartial, nonce?: num
 /**
  * Create a multiSendCallOnly transaction from an array of MetaTransactionData and options
  * If only one tx is passed it will be created without multiSend and without onlyCalls.
+ *
+ * WORKAROUND for Safe SDK bug:
+ * - SDK sets operation=Call (0) for MultiSend transactions
+ * - But MultiSendCallOnly requires DelegateCall (operation=1)
+ *
+ * Fix: Force operation to DelegateCall ONLY for MultiSend (multiple txs)
  */
 export const createMultiSendCallOnlyTx = async (txParams: MetaTransactionData[]): Promise<SafeTransaction> => {
   const safeSDK = getAndValidateSafeSDK()
-  return safeSDK.createTransaction({ transactions: txParams, onlyCalls: true })
+  const safeTx = await safeSDK.createTransaction({ transactions: txParams, onlyCalls: true })
+
+  // Only apply for MultiSend (multiple transactions)
+  // Single transactions keep operation=0 (CALL)
+  if (txParams.length > 1 && safeTx.data.operation === OperationType.Call) {
+    console.warn(
+      '[Safe SDK Bug Workaround] Changing operation from CALL to DELEGATE_CALL for MultiSendCallOnly transaction'
+    )
+    safeTx.data.operation = OperationType.DelegateCall
+  }
+
+  return safeTx
 }
 
 export const createRemoveOwnerTx = async (txParams: RemoveOwnerTxParams): Promise<SafeTransaction> => {
