@@ -1,0 +1,27 @@
+name = "safe-wallet-web"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "yarn install --immutable && yarn workspace @safe-global/web build"
+cwd = ""
+watch_dir = "apps/web"
+
+[build.upload]
+format = "service-worker"
+dir = "apps/web/.next"
+main = "./index.js"
+
+[env.production]
+name = "safe-wallet-web"
+vars = { NODE_ENV = "production" }
+
+[env.production.vars]
+NEXT_PUBLIC_GATEWAY_URL_PRODUCTION = "https://safe.xone.org/api"
+NEXT_PUBLIC_GATEWAY_URL_STAGING = "https://safe.xone.org/api"
+NEXT_PUBLIC_DEFAULT_MAINNET_CHAIN_ID = "3721"
+NEXT_PUBLIC_DEFAULT_TESTNET_CHAIN_ID = "3721"
+NEXT_PUBLIC_WC_PROJECT_ID = "5ad37922941a8ac1add3e3eff189c8ca"
+NEXT_PUBLIC_IS_PRODUCTION = "true"
+NEXT_PUBLIC_IS_OFFICIAL_HOST = "false"
+NEXT_PUBLIC_STATUS_PAGE_URL = "https://status.xone.org/"
+NEXT_TELEMETRY_DISABLED = "1"
