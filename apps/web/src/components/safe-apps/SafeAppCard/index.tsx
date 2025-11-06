@@ -162,10 +162,10 @@ export const SafeAppCardContainer = ({
   }
 
   return (
-    <Link href={safeAppUrl} passHref rel="noreferrer" onClick={handleClickSafeApp}>
+    <Link href={safeAppUrl} rel="noreferrer" onClick={handleClickSafeApp}>
       <Card className={classNames(css.safeAppContainer, className)} sx={{ height }}>
         {children}
       </Card>
     </Link>
-  )
+  );
 }

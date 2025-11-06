@@ -53,7 +53,9 @@ const NativeSwapsCard = () => {
           }}
         >
           <Track {...SWAP_EVENTS.OPEN_SWAPS} label={SWAP_LABELS.safeAppsPromoWidget}>
-            <Link href={{ pathname: AppRoutes.swap, query: { safe: router.query.safe } }} passHref legacyBehavior>
+            <Link href={{ pathname: AppRoutes.swap, query: { safe: router.query.safe } }}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+              }
               <Button variant="contained" size="small">
                 Try now
               </Button>
@@ -65,7 +67,7 @@ const NativeSwapsCard = () => {
         </Stack>
       </CardContent>
     </Paper>
-  )
+  );
 }
 
 export default NativeSwapsCard

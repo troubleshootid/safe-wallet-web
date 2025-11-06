@@ -18,13 +18,13 @@ const UnauthorizedState = () => {
             sign in with a different wallet or go back to the overview.
           </Typography>
 
-          <Link href={AppRoutes.welcome.spaces} passHref>
+          <Link href={AppRoutes.welcome.spaces}>
             <Button variant="outlined">Back to overview</Button>
           </Link>
         </Box>
       </Box>
     </Box>
-  )
+  );
 }
 
 export default UnauthorizedState

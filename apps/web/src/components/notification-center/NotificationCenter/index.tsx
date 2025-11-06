@@ -112,7 +112,6 @@ const NotificationCenter = (): ReactElement => {
           <SvgIcon component={BellIcon} inheritViewBox fontSize="medium" />
         </UnreadBadge>
       </ButtonBase>
-
       <Popover
         // Clicking the "view transaction" link doesn't remove the popover even though
         // handleClose is called which results in the UI not being clickable anymore
@@ -184,10 +183,9 @@ const NotificationCenter = (): ReactElement => {
                 href={{
                   pathname: AppRoutes.settings.notifications,
                   query: router.query,
-                }}
-                passHref
-                legacyBehavior
-              >
+                }}>
+                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                }
                 <MuiLink
                   data-testid="notifications-button"
                   className={css.settingsLink}
@@ -202,7 +200,7 @@ const NotificationCenter = (): ReactElement => {
         </Paper>
       </Popover>
     </>
-  )
+  );
 }
 
 export default NotificationCenter

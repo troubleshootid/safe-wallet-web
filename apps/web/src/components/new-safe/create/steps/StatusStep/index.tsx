@@ -140,7 +140,7 @@ export const CreateSafeStatus = ({
               gap: 2,
             }}
           >
-            <Link href={AppRoutes.welcome.index} passHref>
+            <Link href={AppRoutes.welcome.index}>
               <Button variant="outlined" onClick={onCancel}>
                 Go to homepage
               </Button>
@@ -152,5 +152,5 @@ export const CreateSafeStatus = ({
         )}
       </Box>
     </Paper>
-  )
+  );
 }

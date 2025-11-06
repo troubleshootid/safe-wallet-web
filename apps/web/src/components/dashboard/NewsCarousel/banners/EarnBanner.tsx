@@ -32,7 +32,8 @@ const EarnBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           </Typography>
 
           <Track {...EARN_EVENTS.OPEN_EARN_PAGE} label={EARN_LABELS.safe_dashboard_banner}>
-            <Link href={AppRoutes.earn && { pathname: AppRoutes.earn, query: { safe: router.query.safe } }} passHref>
+            <Link
+              href={AppRoutes.earn && { pathname: AppRoutes.earn, query: { safe: router.query.safe } }}>
               <Button
                 endIcon={<ChevronRightIcon fontSize="small" />}
                 variant="text"
@@ -46,14 +47,13 @@ const EarnBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           </Track>
         </Box>
       </Stack>
-
       <Track {...EARN_EVENTS.HIDE_EARN_BANNER}>
         <IconButton className={css.closeButton} aria-label="close" onClick={onDismiss}>
           <CloseIcon fontSize="small" color="border" />
         </IconButton>
       </Track>
     </Card>
-  )
+  );
 }
 
 export default EarnBanner

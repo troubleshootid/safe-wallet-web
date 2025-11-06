@@ -163,11 +163,15 @@ const SetAddressStep = ({ data, onSubmit, onBack }: StepRenderProps<LoadSafeForm
             }}
           >
             By continuing you consent to the{' '}
-            <Link href={AppRoutes.terms} passHref legacyBehavior>
+            <Link href={AppRoutes.terms}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+              }
               <MUILink>terms of use</MUILink>
             </Link>{' '}
             and{' '}
-            <Link href={AppRoutes.privacy} passHref legacyBehavior>
+            <Link href={AppRoutes.privacy}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+              }
               <MUILink>privacy policy</MUILink>
             </Link>
             .
@@ -201,7 +205,7 @@ const SetAddressStep = ({ data, onSubmit, onBack }: StepRenderProps<LoadSafeForm
         </Box>
       </form>
     </FormProvider>
-  )
+  );
 }
 
 export default SetAddressStep

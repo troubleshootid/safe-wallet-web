@@ -39,9 +39,7 @@ const CSVAirdropAppModal = ({ onClose, appUrl }: { onClose: () => void; appUrl?:
                 safe: router.query.safe,
                 appUrl,
               },
-            }}
-            passHref
-          >
+            }}>
             <Button variant="contained" data-testid="open-app-btn">
               Open CSV Airdrop
             </Button>
@@ -49,7 +47,7 @@ const CSVAirdropAppModal = ({ onClose, appUrl }: { onClose: () => void; appUrl?:
         </DialogActions>
       )}
     </ModalDialog>
-  )
+  );
 }
 
 export default CSVAirdropAppModal

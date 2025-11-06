@@ -28,7 +28,9 @@ const SafeImprint = () => (
       Responsible for content: Rahul Rumalla
       <br />
       Contact:{' '}
-      <Link href="mailto:info@safe.global" passHref legacyBehavior>
+      <Link href="mailto:info@safe.global">
+        {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+        }
         <MUILink>Email address: info@safe.global</MUILink>
       </Link>
       <br />
@@ -63,7 +65,9 @@ const SafeImprint = () => (
     </Typography>
     <Typography>
       This website and their contents are subject to copyright laws.{' '}
-      <Link href="https://github.com/safe-global/safe-wallet-web/blob/dev/LICENSE" passHref legacyBehavior>
+      <Link href="https://github.com/safe-global/safe-wallet-web/blob/dev/LICENSE">
+        {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+        }
         <MUILink target="_blank" rel="noreferrer">
           The code is open-source, released under GPL-3.0.
         </MUILink>

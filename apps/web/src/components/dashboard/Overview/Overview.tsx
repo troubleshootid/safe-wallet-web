@@ -105,14 +105,14 @@ const Overview = (): ReactElement => {
                       return (
                         <Track {...SWAP_EVENTS.OPEN_SWAPS} label={SWAP_LABELS.dashboard}>
                           {isOk ? (
-                            <Link href={{ pathname: AppRoutes.swap, query: router.query }} passHref type="button">
+                            <Link href={{ pathname: AppRoutes.swap, query: router.query }} type="button">
                               {btn}
                             </Link>
                           ) : (
                             btn
                           )}
                         </Track>
-                      )
+                      );
                     }}
                   </CheckWallet>
                 </Box>
@@ -140,7 +140,7 @@ const Overview = (): ReactElement => {
         </Stack>
       </Box>
     </Card>
-  )
+  );
 }
 
 export default Overview

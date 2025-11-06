@@ -18,7 +18,10 @@ const EnvHintButton = () => {
   }
 
   return (
-    <Link href={{ pathname: AppRoutes.settings.environmentVariables, query: router.query }} passHref legacyBehavior>
+    <Link
+      href={{ pathname: AppRoutes.settings.environmentVariables, query: router.query }}>
+      {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+      }
       <Tooltip title="Default environment has been changed" placement="top" arrow>
         <IconButton
           className={css.button}
@@ -31,7 +34,7 @@ const EnvHintButton = () => {
         </IconButton>
       </Tooltip>
     </Link>
-  )
+  );
 }
 
 export default EnvHintButton

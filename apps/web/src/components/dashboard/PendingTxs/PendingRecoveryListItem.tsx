@@ -27,7 +27,7 @@ function PendingRecoveryListItem({ transaction }: { transaction: RecoveryQueueIt
   )
 
   return (
-    <Link href={url} passHref>
+    <Link href={url}>
       <Box className={classnames(css.container, css.recoveryContainer)} sx={{ minHeight: 50 }}>
         <RecoveryType isMalicious={isMalicious} date={transaction.timestamp} isDashboard />
 
@@ -39,7 +39,7 @@ function PendingRecoveryListItem({ transaction }: { transaction: RecoveryQueueIt
         </Stack>
       </Box>
     </Link>
-  )
+  );
 }
 
 export default PendingRecoveryListItem

@@ -66,9 +66,7 @@ const StakingBanner = ({
               widget. You can also{' '}
               <NextLink
                 href={{ pathname: AppRoutes.apps.index, query: { ...router.query, categories: ['Staking'] } }}
-                passHref
-                type="link"
-              >
+                type="link">
                 <Link>explore Safe Apps</Link>
               </NextLink>{' '}
               and home staking for other options. Staking involves risks like slashing.
@@ -97,11 +95,9 @@ const StakingBanner = ({
             </Box>
             <NextLink
               href={AppRoutes.stake && { pathname: AppRoutes.stake, query: { safe: router.query.safe } }}
-              passHref
               rel="noreferrer"
               onClick={onClick}
-              className={classNames(css.stakeButton)}
-            >
+              className={classNames(css.stakeButton)}>
               <Button fullWidth size="small" variant="contained">
                 Stake
               </Button>
@@ -110,7 +106,7 @@ const StakingBanner = ({
         </Stack>
       </Card>
     </>
-  )
+  );
 }
 
 export default StakingBanner

@@ -57,12 +57,12 @@ const SpaceAddressBookCTA = () => {
       <Typography pl={1} mb={2} maxWidth="500px">
         This data is stored in your local storage. Do you want to manage your <b>{space?.name}</b> space address book
         instead?{' '}
-        <Link href={{ pathname: AppRoutes.spaces.addressBook, query: { spaceId } }} passHref>
+        <Link href={{ pathname: AppRoutes.spaces.addressBook, query: { spaceId } }}>
           <MUILink>Click here</MUILink>
         </Link>
       </Typography>
     </Box>
-  )
+  );
 }
 
 type Props = {

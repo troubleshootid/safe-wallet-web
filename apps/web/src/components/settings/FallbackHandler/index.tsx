@@ -31,14 +31,16 @@ export const FallbackHandlerWarning = ({
       {!!txBuilder && !!txBuilderLinkPrefix && (
         <>
           {` ${txBuilderLinkPrefix} `}
-          <NextLink href={txBuilder.link} passHref legacyBehavior>
+          <NextLink href={txBuilder.link}>
+            {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+            }
             <Link>Transaction Builder</Link>
           </NextLink>
           .
         </>
       )}
     </>
-  )
+  );
 }
 
 export const FallbackHandler = (): ReactElement | null => {

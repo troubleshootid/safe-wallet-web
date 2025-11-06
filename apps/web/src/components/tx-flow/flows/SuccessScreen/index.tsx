@@ -94,7 +94,6 @@ const SuccessScreen = ({ txId, txHash }: Props) => {
         <LoadingSpinner status={spinnerStatus} />
         {StatusComponent}
       </div>
-
       {!error && (
         <>
           <Divider />
@@ -103,9 +102,7 @@ const SuccessScreen = ({ txId, txHash }: Props) => {
           </div>
         </>
       )}
-
       <Divider />
-
       <div className={classnames(css.row, css.buttons)}>
         {isSwapOrder && (
           <Button data-testid="finish-transaction-btn" variant="outlined" size="small" onClick={onClose}>
@@ -114,7 +111,9 @@ const SuccessScreen = ({ txId, txHash }: Props) => {
         )}
 
         {txLink && (
-          <Link {...txLink} passHref target="_blank" rel="noreferrer" legacyBehavior>
+          <Link {...txLink} target="_blank" rel="noreferrer">
+            {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+            }
             <Button
               data-testid="view-transaction-btn"
               variant={isSwapOrder ? 'contained' : 'outlined'}
@@ -130,10 +129,9 @@ const SuccessScreen = ({ txId, txHash }: Props) => {
           (predictedSafeAddress ? (
             <Track {...NESTED_SAFE_EVENTS.OPEN_NESTED_SAFE} label={NESTED_SAFE_LABELS.success_screen}>
               <Link
-                href={{ pathname: AppRoutes.home, query: { safe: `${chain?.shortName}:${predictedSafeAddress}` } }}
-                passHref
-                legacyBehavior
-              >
+                href={{ pathname: AppRoutes.home, query: { safe: `${chain?.shortName}:${predictedSafeAddress}` } }}>
+                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                }
                 <Button
                   data-testid="open-nested-safe-btn"
                   variant="contained"
@@ -152,7 +150,7 @@ const SuccessScreen = ({ txId, txHash }: Props) => {
           ))}
       </div>
     </Container>
-  )
+  );
 }
 
 export default SuccessScreen

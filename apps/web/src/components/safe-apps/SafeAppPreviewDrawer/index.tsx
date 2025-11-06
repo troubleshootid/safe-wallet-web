@@ -93,14 +93,12 @@ const SafeAppPreviewDrawer = ({ isOpen, safeApp, isBookmarked, onClose, onBookma
         </Box>
 
         {/* Open Safe App button */}
-        <Link href={safeAppUrl} passHref legacyBehavior>
+        <Link href={safeAppUrl}>
           <Button
             data-testid="open-safe-app-btn"
             fullWidth
             variant="contained"
             color="primary"
-            component="a"
-            href={safeApp?.url}
             sx={{ mt: 3 }}
             onClick={onOpenSafe}
           >
@@ -112,7 +110,7 @@ const SafeAppPreviewDrawer = ({ isOpen, safeApp, isBookmarked, onClose, onBookma
         {safeApp && <SafeAppSocialLinksCard safeApp={safeApp} />}
       </Box>
     </Drawer>
-  )
+  );
 }
 
 export default SafeAppPreviewDrawer

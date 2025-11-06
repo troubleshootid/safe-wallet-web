@@ -15,7 +15,9 @@ const TryDemo = ({ demoUrl, onClick }: Props) => (
       Try the Safe App before using it
     </Typography>
     <DemoAppSVG alt="An icon of a internet browser" />
-    <Link href={demoUrl} passHref legacyBehavior>
+    <Link href={demoUrl}>
+      {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+      }
       <Button variant="outlined" sx={{ width: CTA_BUTTON_WIDTH }} onClick={onClick}>
         Try demo
       </Button>

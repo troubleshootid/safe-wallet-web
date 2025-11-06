@@ -30,7 +30,8 @@ const StakeBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           </Typography>
 
           <Track {...OVERVIEW_EVENTS.OPEN_STAKING_WIDGET}>
-            <Link href={AppRoutes.stake && { pathname: AppRoutes.stake, query: { safe: router.query.safe } }} passHref>
+            <Link
+              href={AppRoutes.stake && { pathname: AppRoutes.stake, query: { safe: router.query.safe } }}>
               <Button
                 endIcon={<ChevronRightIcon fontSize="small" />}
                 variant="text"
@@ -44,14 +45,13 @@ const StakeBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           </Track>
         </Box>
       </Stack>
-
       <Track {...OVERVIEW_EVENTS.HIDE_STAKING_BANNER}>
         <IconButton className={css.closeButton} aria-label="close" onClick={onDismiss}>
           <CloseIcon fontSize="small" color="border" />
         </IconButton>
       </Track>
     </Card>
-  )
+  );
 }
 
 export default StakeBanner

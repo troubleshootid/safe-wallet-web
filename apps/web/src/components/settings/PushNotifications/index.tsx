@@ -168,7 +168,9 @@ export const PushNotifications = (): ReactElement => {
                   <Paper className={css.globalInfo} variant="outlined">
                     <Typography variant="body2">
                       Want to setup notifications for different or all Safe Accounts? You can do so in your{' '}
-                      <Link href={AppRoutes.settings.notifications} passHref legacyBehavior>
+                      <Link href={AppRoutes.settings.notifications}>
+                        {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                        }
                         <MuiLink>global preferences</MuiLink>
                       </Link>
                       .
@@ -293,5 +295,5 @@ export const PushNotifications = (): ReactElement => {
         </Paper>
       )}
     </>
-  )
+  );
 }

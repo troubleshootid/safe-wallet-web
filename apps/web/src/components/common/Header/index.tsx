@@ -77,54 +77,46 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
           </IconButton>
         )}
       </div>
-
       <div className={classnames(css.element, css.logoMobile)}>
-        <Link href={logoHref} passHref>
+        <Link href={logoHref}>
           {isOfficialHost ? <SafeLogoMobile alt="Safe logo" /> : null}
         </Link>
       </div>
-
       <div className={classnames(css.element, css.hideMobile, css.logo)}>
-        <Link href={logoHref} passHref>
+        <Link href={logoHref}>
           {isOfficialHost ? <SafeLabsLogo alt={BRAND_NAME} /> : BRAND_LOGO && <img src={BRAND_LOGO} alt={BRAND_NAME} />}
         </Link>
       </div>
-
       {showSafeToken && (
         <div className={classnames(css.element, css.hideMobile)}>
           <SafeTokenWidget />
         </div>
       )}
-
       <div data-testid="notifications-center" className={css.element}>
         <NotificationCenter />
       </div>
-
       {showBatchButton && (
         <div className={classnames(css.element, css.hideMobile)}>
           <BatchIndicator onClick={handleBatchToggle} />
         </div>
       )}
-
       {enableWc && (
         <div className={classnames(css.element, css.hideMobile)}>
           <WalletConnect />
         </div>
       )}
-
       <div className={classnames(css.element, css.connectWallet)}>
         <Track label={OVERVIEW_LABELS.top_bar} {...OVERVIEW_EVENTS.OPEN_ONBOARD}>
           <ConnectWallet />
         </Track>
       </div>
-
       {safeAddress && (
         <div className={classnames(css.element, css.networkSelector)}>
           <NetworkSelector offerSafeCreation />
         </div>
       )}
     </Paper>
-  )
+  );
 }
 
 export default Header

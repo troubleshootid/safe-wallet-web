@@ -49,7 +49,6 @@ const SafeAppSocialLinksCard = ({ safeApp }: SafeAppSocialLinksCardProps) => {
           </Typography>
         </div>
       </Box>
-
       <Box className={css.socialLinksSectionContainer} display="flex" gap={4}>
         {/* Social links section */}
         {hasSocialLinks && (
@@ -123,23 +122,23 @@ const SafeAppSocialLinksCard = ({ safeApp }: SafeAppSocialLinksCardProps) => {
               Website
             </Typography>
 
-            <Link
+            <MuiLink
               href={developerWebsite}
-              passHref
               target="_blank"
               rel="noopener noreferrer"
+              className={css.websiteLink}
+              underline="hover"
+              fontWeight="bold"
+              mt={1.2}
               color="primary"
-              legacyBehavior
             >
-              <MuiLink target="_blank" className={css.websiteLink} underline="hover" fontWeight="bold" mt={1.2}>
-                {developerWebsite}
-              </MuiLink>
-            </Link>
+              {developerWebsite}
+            </MuiLink>
           </Box>
         )}
       </Box>
     </Card>
-  )
+  );
 }
 
 export default SafeAppSocialLinksCard

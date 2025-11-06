@@ -28,7 +28,9 @@ export const NotificationLink = ({
 
   const LinkWrapper = ({ children }: React.PropsWithChildren) =>
     'href' in link ? (
-      <NextLink href={link.href} passHref legacyBehavior>
+      <NextLink href={link.href}>
+        {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+        }
         {children}
       </NextLink>
     ) : (

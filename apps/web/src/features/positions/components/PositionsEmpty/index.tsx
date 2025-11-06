@@ -19,11 +19,9 @@ const PositionsEmpty = ({ entryPoint = 'Dashboard' }: PositionsEmptyProps) => {
   return (
     <Paper elevation={0} sx={{ p: 3, textAlign: 'center' }}>
       <DefiIcon />
-
       <Typography data-testid="no-tx-text" variant="body1" color="primary.light">
         You have no active DeFi positions yet
       </Typography>
-
       {isEarnFeatureEnabled && (
         <Track
           {...POSITIONS_EVENTS.EMPTY_POSITIONS_EXPLORE_CLICKED}
@@ -31,7 +29,7 @@ const PositionsEmpty = ({ entryPoint = 'Dashboard' }: PositionsEmptyProps) => {
             [MixpanelEventParams.ENTRY_POINT]: entryPoint,
           }}
         >
-          <Link href={{ pathname: AppRoutes.earn, query: { safe: router.query.safe } }} passHref>
+          <Link href={{ pathname: AppRoutes.earn, query: { safe: router.query.safe } }}>
             <Button size="small" sx={{ mt: 1 }}>
               Explore Earn
             </Button>
@@ -39,7 +37,7 @@ const PositionsEmpty = ({ entryPoint = 'Dashboard' }: PositionsEmptyProps) => {
         </Track>
       )}
     </Paper>
-  )
+  );
 }
 
 export default PositionsEmpty

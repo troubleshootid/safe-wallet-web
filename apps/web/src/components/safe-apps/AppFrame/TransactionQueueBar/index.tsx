@@ -66,6 +66,7 @@ const TransactionQueueBar = ({
               </Typography>
 
               <IconButton
+                component="div"
                 onClick={(event) => {
                   event.stopPropagation()
                   setExpanded((prev) => !prev)
@@ -75,7 +76,14 @@ const TransactionQueueBar = ({
               >
                 <ExpandLessIcon />
               </IconButton>
-              <IconButton onClick={onDismiss} aria-label="dismiss transaction queue bar">
+              <IconButton
+                component="div"
+                onClick={(event) => {
+                  event.stopPropagation()
+                  onDismiss()
+                }}
+                aria-label="dismiss transaction queue bar"
+              >
                 <CloseIcon />
               </IconButton>
             </AccordionSummary>

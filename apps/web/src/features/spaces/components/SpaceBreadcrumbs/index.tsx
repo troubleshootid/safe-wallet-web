@@ -31,18 +31,18 @@ const SpaceBreadcrumbs = () => {
   return (
     <>
       <Track {...SPACE_EVENTS.OPEN_SPACE_LIST_PAGE} label={SPACE_LABELS.space_breadcrumbs}>
-        <Link href={{ pathname: AppRoutes.welcome.spaces }} passHref>
+        <Link href={{ pathname: AppRoutes.welcome.spaces }}>
           <IconButton size="small">
             <SvgIcon component={SpaceIcon} inheritViewBox sx={{ fill: 'none' }} fontSize="small" color="primary" />
           </IconButton>
         </Link>
       </Track>
-
       <Typography variant="body2">/</Typography>
-
       {space && (
         <Track {...SPACE_EVENTS.OPEN_SPACE_DASHBOARD} label={SPACE_LABELS.space_breadcrumbs}>
-          <Link href={{ pathname: AppRoutes.spaces.index, query: { spaceId } }} passHref className={css.spaceName}>
+          <Link
+            href={{ pathname: AppRoutes.spaces.index, query: { spaceId } }}
+            className={css.spaceName}>
             <InitialsAvatar name={space.name} size="xsmall" />
             <Typography variant="body2" fontWeight="bold">
               {space.name}
@@ -50,13 +50,11 @@ const SpaceBreadcrumbs = () => {
           </Link>
         </Track>
       )}
-
       <Typography variant="body2">/</Typography>
-
       {/* In case the nested breadcrumbs are not rendered we want to show the current safe address */}
       {!parentSafe && <BreadcrumbItem title="Current Safe" address={safeAddress} />}
     </>
-  )
+  );
 }
 
 export default SpaceBreadcrumbs

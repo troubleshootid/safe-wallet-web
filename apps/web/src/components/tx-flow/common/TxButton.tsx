@@ -49,7 +49,7 @@ export const TxBuilderButton = () => {
 
   return (
     <Track {...MODALS_EVENTS.CONTRACT_INTERACTION}>
-      <Link href={txBuilder.link} passHref style={{ width: '100%' }}>
+      <Link href={txBuilder.link} style={{ width: '100%' }}>
         <Button
           variant="outlined"
           sx={buttonSx}
@@ -61,7 +61,7 @@ export const TxBuilderButton = () => {
         </Button>
       </Link>
     </Track>
-  )
+  );
 }
 
 export const MakeASwapButton = () => {

@@ -115,7 +115,9 @@ const SpaceInfoModal = ({
                     Create a space
                   </Button>
                 ) : (
-                  <Link href={AppRoutes.welcome.spaces} passHref legacyBehavior>
+                  <Link href={AppRoutes.welcome.spaces}>
+                    {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                    }
                     <Button
                       variant="contained"
                       color="primary"
@@ -155,7 +157,7 @@ const SpaceInfoModal = ({
         </IconButton>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
 export default SpaceInfoModal

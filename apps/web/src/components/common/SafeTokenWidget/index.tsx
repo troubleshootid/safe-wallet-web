@@ -75,7 +75,9 @@ const SafeTokenWidget = () => {
       >
         <span>
           <Track {...OVERVIEW_EVENTS.SAFE_TOKEN_WIDGET}>
-            <Link href={url} passHref legacyBehavior>
+            <Link href={url}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+              }
               <ButtonBase aria-describedby="safe-token-widget" className={css.tokenButton} disabled={url === undefined}>
                 <SafeTokenIcon width={24} height={24} />
                 <Typography
@@ -105,7 +107,7 @@ const SafeTokenWidget = () => {
         </span>
       </Tooltip>
     </Box>
-  )
+  );
 }
 
 export default SafeTokenWidget

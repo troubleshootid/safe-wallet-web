@@ -26,7 +26,7 @@ const SpacesBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           </Typography>
 
           <Track {...SPACE_EVENTS.OPEN_SPACE_LIST_PAGE} label={SPACE_LABELS.safe_dashboard_banner}>
-            <Link href={AppRoutes.welcome.spaces} passHref>
+            <Link href={AppRoutes.welcome.spaces}>
               <Button
                 endIcon={<ChevronRightIcon fontSize="small" />}
                 variant="text"
@@ -40,14 +40,13 @@ const SpacesBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           </Track>
         </Box>
       </Stack>
-
       <Track {...SPACE_EVENTS.HIDE_DASHBOARD_WIDGET}>
         <IconButton className={css.closeButton} aria-label="close" onClick={onDismiss}>
           <CloseIcon fontSize="small" color="border" />
         </IconButton>
       </Track>
     </Card>
-  )
+  );
 }
 
 export default SpacesBanner

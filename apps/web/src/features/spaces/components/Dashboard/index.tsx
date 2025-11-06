@@ -23,7 +23,9 @@ import { flattenSafeItems } from '@/features/myAccounts/hooks/useAllSafesGrouped
 
 const ViewAllLink = ({ url }: { url: LinkProps['href'] }) => {
   return (
-    <NextLink href={url} passHref legacyBehavior>
+    <NextLink href={url}>
+      {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+      }
       <Link
         sx={{
           display: 'flex',
@@ -37,7 +39,7 @@ const ViewAllLink = ({ url }: { url: LinkProps['href'] }) => {
         View all <ChevronRightIcon fontSize="small" />
       </Link>
     </NextLink>
-  )
+  );
 }
 
 const DASHBOARD_LIST_DISPLAY_LIMIT = 5
