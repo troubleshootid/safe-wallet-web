@@ -56,6 +56,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
                     <NameChip txData={txData} txInfo={txInfo} />
 
                     <Typography
+                      component="div"
                       variant="body2"
                       mt={grid ? 0.75 : 0}
                       width={grid ? undefined : '100%'}
@@ -82,7 +83,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
                 </TxDetailsRow>
 
                 <TxDetailsRow label="Data" grid={grid}>
-                  <Typography variant="body2" width={grid ? '70%' : undefined}>
+                  <Typography component="div" variant="body2" width={grid ? '70%' : undefined}>
                     <HexEncodedData hexData={safeTxData.data} limit={140} />
                   </Typography>
                 </TxDetailsRow>
@@ -107,7 +108,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
                 </TxDetailsRow>
 
                 <TxDetailsRow label="GasToken" grid={grid}>
-                  <Typography variant="body2">
+                  <Typography component="div" variant="body2">
                     <EthHashInfo
                       address={safeTxData.gasToken}
                       avatarSize={20}
@@ -120,7 +121,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
                 </TxDetailsRow>
 
                 <TxDetailsRow label="RefundReceiver" grid={grid}>
-                  <Typography variant="body2">
+                  <Typography component="div" variant="body2">
                     <EthHashInfo
                       address={safeTxData.refundReceiver}
                       avatarSize={20}
@@ -146,7 +147,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
                           key={`signature-${index}`}
                           grid={grid}
                         >
-                          <Typography variant="body2" width={grid ? '70%' : undefined}>
+                          <Typography component="div" variant="body2" width={grid ? '70%' : undefined}>
                             <HexEncodedData hexData={signature} highlightFirstBytes={false} limit={30} />
                           </Typography>
                         </TxDetailsRow>
@@ -163,7 +164,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
               <Stack spacing={1} divider={<Divider />}>
                 {domainHash && (
                   <TxDetailsRow label="Domain hash" grid={grid}>
-                    <Typography variant="body2" width="100%" sx={{ wordWrap: 'break-word' }}>
+                    <Typography component="div" variant="body2" width="100%" sx={{ wordWrap: 'break-word' }}>
                       <HexEncodedData hexData={domainHash} limit={66} highlightFirstBytes={false} />
                     </Typography>
                   </TxDetailsRow>
@@ -171,7 +172,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
 
                 {messageHash && (
                   <TxDetailsRow label="Message hash" grid={grid}>
-                    <Typography variant="body2" width="100%" sx={{ wordWrap: 'break-word' }}>
+                    <Typography component="div" variant="body2" width="100%" sx={{ wordWrap: 'break-word' }}>
                       <HexEncodedData hexData={messageHash} limit={66} highlightFirstBytes={false} />
                     </Typography>
                   </TxDetailsRow>
@@ -179,7 +180,7 @@ export const Receipt = ({ safeTxData, txData, txDetails, txInfo, grid, withSigna
 
                 {safeTxHash && (
                   <TxDetailsRow label="safeTxHash" grid={grid}>
-                    <Typography variant="body2" width="100%" sx={{ wordWrap: 'break-word' }}>
+                    <Typography component="div" variant="body2" width="100%" sx={{ wordWrap: 'break-word' }}>
                       <HexEncodedData hexData={safeTxHash} limit={66} highlightFirstBytes={false} />
                     </Typography>
                   </TxDetailsRow>

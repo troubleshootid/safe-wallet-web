@@ -32,18 +32,18 @@ const PendingTx = ({ transaction }: PendingTxType): ReactElement => {
   )
 
   return (
-    <NextLink data-testid="tx-pending-item" href={url} passHref>
+    <NextLink data-testid="tx-pending-item" href={url}>
       <Box className={css.container}>
         <Stack direction="row" gap={1.5} alignItems="center">
           <Box className={css.iconWrapper}>
             <TxTypeIcon tx={transaction} />
           </Box>
           <Box>
-            <Typography className={css.txDescription}>
+            <Typography component="div" className={css.txDescription}>
               <TxTypeText tx={transaction} />
               <TxInfo info={transaction.txInfo} />
             </Typography>
-            <Typography variant="body2" color="primary.light">
+            <Typography component="div" variant="body2" color="primary.light">
               <DateTime value={transaction.timestamp} showDateTime={false} showTime={false} />
             </Typography>
           </Box>
@@ -59,7 +59,7 @@ const PendingTx = ({ transaction }: PendingTxType): ReactElement => {
         </Box>
       </Box>
     </NextLink>
-  )
+  );
 }
 
 export default PendingTx

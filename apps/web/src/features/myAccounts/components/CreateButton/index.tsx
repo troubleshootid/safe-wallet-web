@@ -6,19 +6,18 @@ const buttonSx = { width: ['100%', 'auto'], height: '36px', px: 2 }
 
 const CreateButton = ({ isPrimary }: { isPrimary: boolean }) => {
   return (
-    <Link href={AppRoutes.newSafe.create} passHref legacyBehavior>
+    <Link href={AppRoutes.newSafe.create}>
       <Button
         data-testid="create-safe-btn"
         disableElevation
         size="small"
         variant={isPrimary ? 'contained' : 'outlined'}
         sx={buttonSx}
-        component="a"
       >
         Create account
       </Button>
     </Link>
-  )
+  );
 }
 
 export default CreateButton

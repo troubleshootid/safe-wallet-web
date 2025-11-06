@@ -34,8 +34,9 @@ export const Card = styled.div`
 `
 
 export const ViewAllLink = ({ url, text }: { url: LinkProps['href']; text?: string }): ReactElement => (
-  <NextLink href={url} passHref legacyBehavior>
+  <NextLink href={url}>
     <Link
+      component="span"
       data-testid="view-all-link"
       sx={{
         textDecoration: 'none',

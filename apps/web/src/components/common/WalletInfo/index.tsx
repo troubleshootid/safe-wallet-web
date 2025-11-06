@@ -81,12 +81,12 @@ export const WalletInfo = ({ wallet, balance, currentChainId, onboard, addressBo
           <Typography variant="body2" color="primary.light">
             Balance
           </Typography>
-          <Typography variant="body2" textAlign="right">
+          <Typography component="div" variant="body2" textAlign="right">
             <WalletBalance balance={balance} />
 
             {currentChainId !== chainInfo?.chainId && (
               <>
-                <Typography variant="body2" color="primary.light">
+                <Typography component="span" variant="body2" color="primary.light">
                   ({chainInfo?.chainName || 'Unknown chain'})
                 </Typography>
               </>

@@ -226,11 +226,11 @@ const AssetsTable = ({
               collapsed: item.tokenInfo.address === hidingAsset,
               content: (
                 <Box textAlign="right">
-                  <Typography>
+                  <Typography component="div">
                     <FiatBalance balanceItem={item} />
                   </Typography>
                   {item.fiatBalance24hChange && (
-                    <Typography variant="caption">
+                    <Typography component="div" variant="caption">
                       <FiatChange balanceItem={item} inline />
                     </Typography>
                   )}
