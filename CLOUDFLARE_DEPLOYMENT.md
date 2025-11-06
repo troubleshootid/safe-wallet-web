@@ -1,37 +1,37 @@
-# Cloudflare Pages 部署指南
+# Cloudflare Pages Deployment Guide
 
-本文档说明如何将 Safe Wallet Web 应用部署到 Cloudflare Pages,并实现自动部署。
+This document explains how to deploy the Safe Wallet Web application to Cloudflare Pages with automatic deployment.
 
-## 前提条件
+## Prerequisites
 
-- GitHub 账号
-- Cloudflare 账号
-- 代码已推送到 GitHub 仓库
+- GitHub account
+- Cloudflare account
+- Code pushed to GitHub repository
 
-## 部署步骤
+## Deployment Steps
 
-### 1. 登录 Cloudflare Dashboard
+### 1. Login to Cloudflare Dashboard
 
-访问 https://dash.cloudflare.com/ 并登录
+Visit https://dash.cloudflare.com/ and sign in
 
-### 2. 创建新的 Pages 项目
+### 2. Create a New Pages Project
 
-1. 点击左侧导航栏的 **Workers & Pages**
-2. 点击 **Create application** 按钮
-3. 选择 **Pages** 标签
-4. 点击 **Connect to Git**
+1. Click **Workers & Pages** in the left navigation
+2. Click **Create application** button
+3. Select the **Pages** tab
+4. Click **Connect to Git**
 
-### 3. 连接 GitHub 仓库
+### 3. Connect GitHub Repository
 
-1. 选择你的 GitHub 账号并授权
-2. 选择仓库: `troubleshootid/safe-wallet-web`
-3. 选择分支: `test` (或你想部署的分支)
+1. Select your GitHub account and authorize
+2. Select repository: `safe-wallet-web`
+3. Select branch: `test` (or your preferred branch)
 
-### 4. 配置构建设置
+### 4. Configure Build Settings
 
-在构建配置页面填写以下信息:
+Fill in the following information on the build configuration page:
 
-**Framework preset:** `None` (手动配置)
+**Framework preset:** `None` (manual configuration)
 
 **Build command:**
 ```bash
@@ -48,98 +48,100 @@ apps/web/.next
 /
 ```
 
-### 5. 环境变量配置
+### 5. Environment Variables Configuration
 
-点击 **Environment variables** 添加以下变量:
+Click **Environment variables** and add the following:
 
-| 变量名 | 值 | 说明 |
-|--------|-------|------|
-| `NODE_VERSION` | `18` | Node.js 版本 |
-| `YARN_VERSION` | `4.6.0` | Yarn 版本 |
-| `NODE_ENV` | `production` | 环境类型 |
+| Variable | Value | Description |
+|----------|-------|-------------|
+| `NODE_VERSION` | `18` | Node.js version |
+| `YARN_VERSION` | `4.6.0` | Yarn version |
+| `NODE_ENV` | `production` | Environment type |
 
-如果有其他环境变量需求,继续添加即可。
+Add any additional environment variables as needed.
 
-### 6. 高级构建设置
+### 6. Advanced Build Settings
 
-展开 **Advanced** 设置:
+Expand **Advanced** settings:
 
 **Node.js version:** `18`
 
-**Install Command (可选):**
+**Install Command (optional):**
 ```bash
 yarn install --immutable
 ```
 
-### 7. 开始部署
+### 7. Start Deployment
 
-点击 **Save and Deploy** 按钮开始首次部署。
+Click **Save and Deploy** to begin the first deployment.
 
-## 自动部署
+## Automatic Deployment
 
-配置完成后,每次向 `test` 分支推送代码时,Cloudflare Pages 会自动:
+Once configured, Cloudflare Pages will automatically:
 
-1. 检测到代码变更
-2. 拉取最新代码
-3. 执行构建命令
-4. 部署新版本
-5. 提供预览 URL
+1. Detect code changes
+2. Pull the latest code
+3. Execute build command
+4. Deploy new version
+5. Provide preview URL
 
-## 访问部署的应用
+Every push to the configured branch will trigger a new deployment.
 
-部署完成后,你会获得:
+## Access the Deployed Application
 
-- **生产环境 URL**: `https://your-project-name.pages.dev`
-- **预览 URL**: 每次提交会生成唯一的预览链接
+After deployment completes, you will receive:
 
-## 监控部署状态
+- **Production URL**: `https://your-project-name.pages.dev`
+- **Preview URLs**: Each commit generates a unique preview link
 
-在 Cloudflare Dashboard 的 Pages 项目页面,你可以:
+## Monitor Deployment Status
 
-- 查看部署历史
-- 查看构建日志
-- 回滚到之前的版本
-- 管理自定义域名
+In the Cloudflare Dashboard Pages project page, you can:
 
-## 自定义域名(可选)
+- View deployment history
+- View build logs
+- Rollback to previous versions
+- Manage custom domains
 
-1. 在项目设置中点击 **Custom domains**
-2. 添加你的域名
-3. 按照提示配置 DNS 记录
+## Custom Domain (Optional)
 
-## 故障排查
+1. Click **Custom domains** in project settings
+2. Add your domain
+3. Configure DNS records as instructed
 
-### 构建失败
+## Troubleshooting
 
-检查构建日志中的错误信息:
-- 依赖安装问题
-- 环境变量缺失
-- 构建脚本错误
+### Build Failures
 
-### 运行时错误
+Check the build logs for error messages:
+- Dependency installation issues
+- Missing environment variables
+- Build script errors
 
-- 检查环境变量是否正确配置
-- 查看浏览器控制台的错误信息
-- 检查 Cloudflare Pages 函数日志
+### Runtime Errors
 
-## 优化建议
+- Verify environment variables are correctly configured
+- Check browser console for error messages
+- Review Cloudflare Pages function logs
 
-1. **缓存优化**: Cloudflare Pages 自动处理静态资源缓存
-2. **边缘渲染**: 利用 Cloudflare 的全球 CDN 网络
-3. **构建缓存**: 启用依赖缓存加速构建
+## Optimization Tips
 
-## 成本
+1. **Cache Optimization**: Cloudflare Pages automatically handles static asset caching
+2. **Edge Rendering**: Leverage Cloudflare's global CDN network
+3. **Build Cache**: Enable dependency caching to speed up builds
 
-Cloudflare Pages 免费套餐包括:
-- 无限静态请求
-- 无限带宽
-- 500 次构建/月
-- 20,000 次函数调用/天
+## Cost
 
-对于个人项目和中小型应用完全足够使用。
+Cloudflare Pages free tier includes:
+- Unlimited static requests
+- Unlimited bandwidth
+- 500 builds/month
+- 20,000 function invocations/day
 
-## 支持
+Sufficient for personal projects and small to medium applications.
 
-如有问题,请查看:
-- [Cloudflare Pages 文档](https://developers.cloudflare.com/pages/)
-- [Next.js 部署指南](https://nextjs.org/docs/deployment)
+## Support
+
+For issues, please refer to:
+- [Cloudflare Pages Documentation](https://developers.cloudflare.com/pages/)
+- [Next.js Deployment Guide](https://nextjs.org/docs/deployment)
