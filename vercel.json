@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "yarn workspace @safe-global/web build",
+  "buildCommand": "corepack enable && yarn workspace @safe-global/web build",
   "devCommand": "yarn workspace @safe-global/web dev",
-  "installCommand": "yarn install --frozen-lockfile",
+  "installCommand": "corepack enable && yarn install",
   "framework": null,
   "outputDirectory": "apps/web/out",
   "cleanUrls": true,
