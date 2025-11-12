@@ -38,9 +38,14 @@ RUN yarn install && \
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Get git commit hash (suppress error if .git not available)
+RUN COMMIT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "docker-build") && \
+    echo "Build commit: $COMMIT_HASH"
+
 # Build the application (generates out/ directory for static export)
 # Skip ESLint during production build (should be run in dev/CI)
-RUN DISABLE_ESLINT_PLUGIN=true yarn build
+RUN COMMIT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "docker-build") && \
+    NEXT_PUBLIC_COMMIT_HASH=$COMMIT_HASH DISABLE_ESLINT_PLUGIN=true yarn build
 
 # Verify build artifacts
 RUN ls -la out/ && \
