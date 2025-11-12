@@ -28,8 +28,7 @@ WORKDIR /app/apps/web
 
 # Enable Corepack and configure Yarn
 RUN corepack enable && \
-    yarn config set httpTimeout 600000 && \
-    yarn config set networkTimeout 600000
+    yarn config set httpTimeout 600000
 
 # Install dependencies and run post-install scripts
 RUN yarn install && \
