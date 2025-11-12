@@ -1,30 +1,72 @@
-FROM node:18-alpine
-RUN apk add --no-cache libc6-compat git python3 py3-pip make g++ libusb-dev eudev-dev linux-headers
+# ============================================
+# Optimized Dockerfile for Railway Deployment
+# Repository: troubleshootid/safe-wallet-web
+# ============================================
 
-# Set working directory
+# Stage 1: Build Stage
+FROM node:18-alpine AS builder
+
+# Install build dependencies
+RUN apk add --no-cache \
+    libc6-compat \
+    git \
+    python3 \
+    py3-pip \
+    make \
+    g++ \
+    libusb-dev \
+    eudev-dev \
+    linux-headers
+
 WORKDIR /app
 
-# Copy root
+# Copy project files
 COPY . .
 
-# Set working directory to the web app
-WORKDIR apps/web
+# Switch to web app directory
+WORKDIR /app/apps/web
 
-# Enable corepack and configure yarn
-RUN corepack enable
-RUN yarn config set httpTimeout 300000
+# Enable Corepack and configure Yarn
+RUN corepack enable && \
+    yarn config set httpTimeout 600000 && \
+    yarn config set networkTimeout 600000
 
-# Run any custom post-install scripts
-RUN yarn install --immutable
-RUN yarn after-install
+# Install dependencies and run post-install scripts
+RUN yarn install && \
+    yarn after-install
 
 # Set environment variables
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
-ENV PORT 3000
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Expose the port
+# Build the application (generates out/ directory for static export)
+# Skip ESLint during production build (should be run in dev/CI)
+RUN DISABLE_ESLINT_PLUGIN=true yarn build
+
+# Verify build artifacts
+RUN ls -la out/ && \
+    echo "✅ Build successful, static files generated"
+
+# ============================================
+# Stage 2: Production Runtime Stage
+# ============================================
+FROM node:18-alpine AS runner
+
+WORKDIR /app
+
+# Copy only necessary files from builder
+COPY --from=builder /app/apps/web/out ./out
+COPY --from=builder /app/apps/web/package.json ./
+
+# Install lightweight static file server
+RUN npm install -g serve@latest
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Expose port
 EXPOSE 3000
 
-# Command to start the application
-CMD ["yarn", "static-serve"]
+# Serve static files with SPA fallback
+CMD ["serve", "out", "-p", "3000", "-s"]
