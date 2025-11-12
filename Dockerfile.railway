@@ -40,7 +40,8 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build the application (generates out/ directory for static export)
-RUN yarn build
+# Skip ESLint during production build (should be run in dev/CI)
+RUN DISABLE_ESLINT_PLUGIN=true yarn build
 
 # Verify build artifacts
 RUN ls -la out/ && \
