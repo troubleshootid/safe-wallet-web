@@ -47,7 +47,13 @@ RUN chmod +x /app/apps/web/docker-entrypoint.sh
 # ============================================
 FROM node:18-alpine AS runner
 
+# Install system dependencies needed for runtime
+RUN apk add --no-cache git
+
 WORKDIR /app
+
+# Enable Corepack to use Yarn 4.5.3 specified in package.json
+RUN corepack enable
 
 # Copy entire build context from builder
 # This includes source code, node_modules, and the startup script
