@@ -23,16 +23,18 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Switch to web app directory
-WORKDIR /app/apps/web
-
-# Enable Corepack and configure Yarn
+# Enable Corepack and configure Yarn in root
 RUN corepack enable && \
     yarn config set httpTimeout 600000
 
-# Install dependencies and run post-install scripts
-RUN yarn install && \
-    yarn after-install
+# Install dependencies in root directory (handles monorepo workspaces)
+RUN yarn install
+
+# Switch to web app directory
+WORKDIR /app/apps/web
+
+# Run post-install scripts
+RUN yarn after-install
 
 # Set environment variables - All hardcoded for Xone Network
 ENV NODE_ENV=production
