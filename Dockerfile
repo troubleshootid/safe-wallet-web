@@ -38,18 +38,9 @@ RUN yarn install && \
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Get git commit hash (suppress error if .git not available)
-RUN COMMIT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "docker-build") && \
-    echo "Build commit: $COMMIT_HASH"
-
-# Build the application (generates out/ directory for static export)
-# Skip ESLint during production build (should be run in dev/CI)
-RUN COMMIT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "docker-build") && \
-    NEXT_PUBLIC_COMMIT_HASH=$COMMIT_HASH DISABLE_ESLINT_PLUGIN=true yarn build
-
-# Verify build artifacts
-RUN ls -la out/ && \
-    echo "✅ Build successful, static files generated"
+# Copy startup script that will build at runtime
+COPY apps/web/docker-entrypoint.sh /app/apps/web/
+RUN chmod +x /app/apps/web/docker-entrypoint.sh
 
 # ============================================
 # Stage 2: Production Runtime Stage
@@ -58,19 +49,20 @@ FROM node:18-alpine AS runner
 
 WORKDIR /app
 
-# Copy only necessary files from builder
-COPY --from=builder /app/apps/web/out ./out
-COPY --from=builder /app/apps/web/package.json ./
+# Copy entire build context from builder
+# This includes source code, node_modules, and the startup script
+COPY --from=builder /app ./
 
-# Install lightweight static file server
-RUN npm install -g serve@latest
+WORKDIR /app/apps/web
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=10000
 
 # Expose port
-EXPOSE 3000
+EXPOSE 10000
 
-# Serve static files with SPA fallback
-CMD ["serve", "out", "-p", "3000", "-s"]
+# Use startup script as entrypoint
+# The script will build Next.js at runtime when environment variables are available
+ENTRYPOINT ["/app/apps/web/docker-entrypoint.sh"]
